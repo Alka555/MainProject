@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>User Approval</h1>
+  {% if users %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Username</th>
+          <th scope="col">Email</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+          <tr>
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>
+              <form method="post" action="{% url 'approve_user' user.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success">Approve</button>
+              </form>
+              <form method="post" action="{% url 'reject_user' user.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Reject</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No pending user registration requests.</p>
+  {% endif %}
+{% endblock %}

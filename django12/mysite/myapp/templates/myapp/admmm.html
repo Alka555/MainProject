@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Side Navigation Bar</title>
+  <link rel="stylesheet" href="{% static 'css/w3.css' %}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+  <style>
+    form {
+      margin: 3rem auto;
+      width: 90%;
+      max-width: 30rem;
+      padding: 1rem;
+      border-radius: 12px;
+      background-color: white;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    }
+    
+    button {
+      cursor: pointer;
+      padding: 0.5rem 1.5rem;
+      border-radius: 6px;
+      background-color: #1f0050;
+      color: white;
+      border: 1px solid #1f0050;
+    }
+    
+    button:hover,
+    button:active {
+      background-color: #320777;
+      border-color: #320777;
+    }
+    
+    .form-control {
+      margin-bottom: 1rem;
+    }
+    
+    .form-control input {
+      font: inherit;
+      padding: 0.5rem;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      display: block;
+      width: 20rem;
+    }
+    
+    .form-control input:focus {
+      border-color: #1f0050;
+      outline: none;
+      background-color: #f4eeff;
+    }
+    
+    .form-control label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    
+  </style>
+</head>
+<body>
+
+  <div class="wrapper">
+    <div class="sidebar">
+        <h2>MFVS</h2>
+        <ul>
+           <li><a href="#"><i class="fa fa-upload"></i>Upload</a></li>
+            <li><a href="#"><i class="fa fa-eye"></i>View Uploaded Files</a></li>
+            <li><a href="#"><i class="fas fa-address-card"></i>Add Users</a></li>
+            <li><a href="#"><i class="fa fa-file"></i>View Reports</a></li>
+        </ul> 
+    </div>
+    <div class="main_content">
+        <div class="header">Welcome to the site !! Admin.</div>  
+        <div class="af">
+          <form action="" method="POST"  enctype="multipart/form-data" style="background:white">
+          {% csrf_token %}
+         {% for fields in forms %}
+          <div class="form-control" style="background:white" {%if fields.errors%}errors{%endif%}>
+          {{fields.label_tag}}
+          {{fields}}
+          {{fields.errors}}
+          {% endfor %}
+      </div>
+          <button type="submit">Submit</button>
+      </form>
+  </div>
+  </div>
+</div>
+</div>
+</body>
+</html>
